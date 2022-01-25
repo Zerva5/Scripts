@@ -1,0 +1,46 @@
+#!/bin/sh
+
+NAME=$1
+LANG=$2
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+DIR="/home/lmayall/Documents/Kattis/$NAME"
+
+
+if [ "$LANG" = "" ]; then
+    echo "no language arg"
+    exit 1
+elif [ "$NAME" = "" ]; then
+    echo "no name arg"
+    exit 1
+fi
+
+
+
+mkdir "$DIR"
+
+touch "$DIR/$NAME.$LANG"
+
+cp "$SCRIPT_DIR/newkattis.makefile" "$DIR/Makefile"
+
+COMPILE=""
+RUN=""
+
+if [ "$LANG" = "c" ]; then
+   COMPILE="gcc $NAME.c -o $NAME.o"
+   RUN=".\/$NAME.o"
+
+elif [ "$LANG" = "py" ]; then
+    # COMPILE="run"
+    # RUN="python {name}.py"
+    rm "$DIR/Makefile"
+    exit 0
+fi
+
+sed -i "s/{%COMPILE}/$COMPILE/g" "$DIR/Makefile"
+sed -i "s/{%RUN}/$RUN/g" "$DIR/Makefile"
+sed -i "s/{%NAME}/$NAME/g" "$DIR/Makefile"
+sed -i "s/{%LANG}/$LANG/g" "$DIR/Makefile"
+
+   
