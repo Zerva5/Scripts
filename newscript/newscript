@@ -1,0 +1,32 @@
+#!/bin/sh
+
+SCRIPT_DIR="/home/lmayall/Documents/Scripts/newscript"
+
+NAME=$1
+
+DESC=$2
+
+NEWDIR="/home/lmayall/Documents/Scripts/$NAME"
+
+
+if [ "$DESC" = "" ]; then
+    echo "no description arg"
+    exit 1
+elif [ "$DESC" = "" ]; then
+    echo "no name arg"
+    exit 1
+fi
+
+
+mkdir "$NEWDIR"
+
+touch "$NEWDIR/$NAME"
+echo "#!/bin/sh" > "$NEWDIR/$NAME"
+
+touch "$NEWDIR/README.MD"
+
+echo "# $NAME" > "$NEWDIR/README.MD"
+echo "$DESC" >> "$NEWDIR/README.MD"
+
+
+
