@@ -3,8 +3,8 @@
 NAME=$1
 LANG=$2
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
+#SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR="/home/lmayall/Documents/Scripts/newkattis"
 DIR="/home/lmayall/Documents/Kattis/$NAME"
 
 
@@ -27,7 +27,7 @@ cp "$SCRIPT_DIR/newkattis.makefile" "$DIR/Makefile"
 COMPILE=""
 RUN=""
 
-if [ "$LANG" = "c" ]; then
+if [ "$LANG" = "c" ] || [ "$LANG" = "C" ]; then
    COMPILE="gcc $NAME.c -o $NAME.o"
    RUN=".\/$NAME.o"
 
